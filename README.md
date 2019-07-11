@@ -1,2 +1,6 @@
 # OPEN-UMA-Rover
-Open repository to create the OpenUMARov
+Developed software, CAD and documentation for the OPEN-UMA-Rover
+
+Software requisites:
+
+PCB CAD: Eagle, Matlab 2016b, Arduino ide
