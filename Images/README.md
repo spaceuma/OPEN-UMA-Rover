@@ -1,8 +1,2 @@
-# OPEN-UMA-Rover
-Developed software, CAD and documentation for the OPEN-UMA-Rover
-
-Software requisites:
-
-PCB CAD: Eagle, Matlab 2016b, Arduino ide
-
-![](https://github.com/spaceuma/OPEN-UMA-Rover/blob/master/Images/3.5.PNG)
+# OPEN-UMA-Rover/Images
+In this folder there are images of the rover, the PCB and GPS and different results of the project.
