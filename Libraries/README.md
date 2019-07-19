@@ -1,8 +1,5 @@
 # OPEN-UMA-Rover
-Developed software, CAD and documentation for the OPEN-UMA-Rover
+In this folder there are the two libraries needed for the Arduino sketch. Also, the links to get them are below:
 
-Software requisites:
-
-PCB CAD: Eagle, Matlab 2016b, Arduino ide
-
-![](https://github.com/spaceuma/OPEN-UMA-Rover/blob/master/Images/3.5.PNG)
+TimerOne: https://www.arduinolibraries.info/libraries/timer-one
+TinyGPSPlus: https://github.com/mikalhart/TinyGPSPlus
