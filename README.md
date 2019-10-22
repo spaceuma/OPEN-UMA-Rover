@@ -17,6 +17,8 @@ Matlab 2016b: The platform includes a computer (NUC) that executes a Matlab Simu
 
 ## Rover prototype
 
+The current version of the rover is shown in the following images. An experiment was carried out to demonstrate the rover is able to move indoor and outdoor.
+
 <p><img src="Images/3.5.PNG" width="42.5%"/><img src="Images/roverexterior.PNG" width="50%"/></p>
 
 
