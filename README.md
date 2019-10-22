@@ -31,7 +31,7 @@ The following video shows the rover performing a square.
 
 ### Electrical and electronics
 
-### Arduino platofmr
+### Arduino platform
 
 ### GPS
 
