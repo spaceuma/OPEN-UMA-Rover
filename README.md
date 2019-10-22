@@ -21,5 +21,7 @@ The current version of the rover is shown in the following images. An experiment
 
 <p><img src="Images/3.5.PNG" width="42.5%"/><img src="Images/roverexterior.PNG" width="50%"/></p>
 
+The following video shows the rover performing a square.
 
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/3GoUsZBUTmU/0.jpg)](https://www.youtube.com/watch?v=3GoUsZBUTmU)
 
