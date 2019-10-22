@@ -17,8 +17,7 @@ Matlab 2016b: The platform includes a computer (NUC) that executes a Matlab Simu
 
 ## Rover prototype
 
-![](https://github.com/spaceuma/OPEN-UMA-Rover/blob/master/Images/3.5.PNG)
+<p><img src="Images/3.5.PNG" width="42.5%"/><img src="Images/roverexterior.PNG" width="50%"/></p>
 
-![](https://github.com/spaceuma/OPEN-UMA-Rover/blob/master/Images/roverexterior.PNG)
 
 
