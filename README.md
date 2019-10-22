@@ -1,4 +1,4 @@
-# Open UMA Rover
+# UMA Open Source Rover
 Open hardware and software rover developed by the University of Malaga
 
 *Authors:* C.J. Pérez del Pulgar, Ricardo Sánchez Ibáñez, Patricio López Lupiañez and Francisco de Asís Delgado Rivero
@@ -20,3 +20,5 @@ Matlab 2016b: The platform includes a computer (NUC) that executes a Matlab Simu
 ![](https://github.com/spaceuma/OPEN-UMA-Rover/blob/master/Images/3.5.PNG)
 
 ![](https://github.com/spaceuma/OPEN-UMA-Rover/blob/master/Images/roverexterior.PNG)
+
+
