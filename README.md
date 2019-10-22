@@ -25,3 +25,18 @@ The following video shows the rover performing a square.
 
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/3GoUsZBUTmU/0.jpg)](https://www.youtube.com/watch?v=3GoUsZBUTmU)
 
+## Assembly
+
+### Mechanical parts
+
+### Electrical and electronics
+
+### Arduino platofmr
+
+### GPS
+
+### Computer software
+
+
+
+
