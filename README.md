@@ -8,7 +8,7 @@ Open hardware and software rover developed by the University of Malaga
 *Affiliation:* University of Malaga, [Space Robotics Lab](https://www.uma.es/robotics-and-mechatronics/info/107542/robotica-espacial/)
 
 ## Overview
-The main purpose of this repository is to provide the resources needed to build the low cost rover (<500€) to perform tests related to robotic autonomy.
+The OpenUmaRov is an open source mobile robotic platform that allows anyone to build it with a maximum cost of 500€. The platform is based on commercial components that can be adcquired by Internet. This project involves students and researchers to improve the development of the platform. Moreover, it can be used for teaching and research activities that involves mechanical, engineering, software, electronics and robotics.
 
 Required software:
 Eagle: Software to design PCB.
