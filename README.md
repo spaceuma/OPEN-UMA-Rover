@@ -46,6 +46,10 @@ The rover power supply PCB has been designed using the CAD software Eagle and it
 
 ### Arduino platform
 
+
+
+<img src="Images/placarduino.png" width="50%">
+
 ### GPS
 
 ### On Board Computer (OBC)
