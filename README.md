@@ -34,6 +34,7 @@ The rover system is made up of mechanical, electronic and computer parts. All of
 ### Mechanical parts
 
 The rover chassis can include two or four motors. The current version includes two [motors](https://www.robotshop.com/eu/en/lynxmotion-12vdc-200rpm-078kg-cm-ghm-16-w--rear-shaft.html) with [encoder](https://www.robotshop.com/eu/en/lynxmotion-quadrature-motor-encoder-v2-cable.html) (front) and two motors without encoders (back). The encoder should be fixed to the motor following the encoder instructions.
+
  <img src="Images/motorencoder.jpg" width="25%">
  
 
