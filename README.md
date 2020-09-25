@@ -7,6 +7,7 @@ Open hardware and software rover developed by Malaga University
 
 *Affiliation:* University of Malaga, [Space Robotics Lab](https://www.uma.es/robotics-and-mechatronics/info/107542/robotica-espacial/)
 
+
 ## Overview
 The OpenUmaRov is an open source mobile robotic platform that allows anyone to build it with a maximum cost of 700€, taking into account that the GPS Reach M+ can be replaced with a cheaper one, giving the possibility to build it with a maximum cost of 500 €. The platform is based on commercial components that can be adcquired by Internet. This project involves students and researchers to improve the development of the platform. Moreover, it can be used for teaching and research activities that involves mechanical, engineering, software, electronics and robotics.
 
@@ -22,6 +23,12 @@ Required software:
 
 - Python IDE: the OpenUMARov node and the GPS node are written in Python.
 
+
+## Rover prototype
+
+The following video shows the rover in different environments.
+
+[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/t7S4xO0TQe0/0.jpg)](https://www.youtube.com/watch?v=t7S4xO0TQe0)
 
 
 ## Assembly
