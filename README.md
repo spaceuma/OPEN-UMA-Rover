@@ -72,7 +72,7 @@ The rover uses the ROS framework. There are two different nodes: one for the GPS
 
 The rover uses a GPS Reach M+, a high precision GPS with a centimetre accuracy. Anyway, it can be replaced with a cheaper one, lowering the rover total cost. 
 
-<img src="Images/image92.PNG" width="50%">
+<img src="Images/image92.PNG" width="20%">
 
 ### LabVIEW 
 
