@@ -26,6 +26,17 @@ Required software:
 
 ## Rover prototype
 
+The current version of the rover is shown in the following images. Some experiments were carried out to demonstrate the rover is able to move indoor and outdoor, in different environments.
+
+In the following pictures, the rover can be seen on a beach and in a forest:
+
+<p><img src="Images/Foto5_roverMar1.jpg" width="42.5%"/>     <img src="Images/Foto1_roverBosque.PNG" width="51%"/></p>
+
+While in the following ones, it can be seen in a street and in a park:
+
+<p><img src="Images/Foto3_roverObstaculo.PNG" width="42.5%"/>     <img src="Images/Foto2_roverParque.PNG" width="45%"/></p>
+
+
 The following video shows the rover in different environments.
 
 [![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/t7S4xO0TQe0/0.jpg)](https://www.youtube.com/watch?v=t7S4xO0TQe0)
