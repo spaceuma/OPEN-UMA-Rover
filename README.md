@@ -69,7 +69,7 @@ The rover power supply PCB has been designed using the CAD software Eagle and it
 
 ### Raspberry Pi
 
-The Raspberry Pi 3B+ is used to control the rover. Using the ROS framework, it receives data from Arduino through the serial port, and from the GPS ROS node subscribing to its topics, publishing each value in a different topic that can be visualized in a LabVIEW GUI.
+The Raspberry Pi 3B+ is used to control the rover. Using the ROS framework, it receives data from Arduino through the serial port, and from the GPS ROS node through different topics, publishing each value in a different topic that can be visualized in a LabVIEW GUI.
 
 <img src="Images/image85.PNG" width="50%">
 
