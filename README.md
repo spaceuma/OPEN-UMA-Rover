@@ -87,7 +87,10 @@ The rover uses a GPS Reach M+, a high precision GPS with a centimetre accuracy. 
 
 ### LabVIEW 
 
-The LabVIEW GUI allows to control the rover. It has two topics where you can publish wheels speeds, and different topics where you can visualize all the data from Arduino and from the GPS. Moreover, GPS position can be visualized in a Google Maps map.  
+The LabVIEW GUI allows to control the rover. It has two topics where you can publish wheels speeds, and different topics where you can visualize all the data from Arduino and from the GPS.  
 
 <img src="Images/image121.PNG" width="100%">
+
+Moreover, GPS position can be visualized in a Google Maps map. 
+
 <img src="Images/image125.PNG" width="100%">
