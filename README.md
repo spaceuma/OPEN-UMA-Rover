@@ -9,7 +9,9 @@ Open hardware and software rover developed by Malaga University
 
 
 ## Overview
-The OpenUmaRov is an open source mobile robotic platform that allows anyone to build it with a maximum cost of 700€, taking into account that the GPS Reach M+ can be replaced with a cheaper one, giving the possibility to build it with a maximum cost of 500 €. The platform is based on commercial components that can be adcquired by Internet. This project involves students and researchers to improve the development of the platform. Moreover, it can be used for teaching and research activities that involves mechanical, engineering, software, electronics and robotics.
+The OpenUmaRov is an open source mobile robotic platform that allows anyone to build it with a maximum cost of 700€, taking into account that the Reach M+ GPS can be replaced with whatever GPS that works with NMEA sentences: just connecting it to the Raspberry Pi through serial port, thanks to the ROS node the GPS can publish NMEA sentences in different topics. This means that, replacing the Reach M+ with a cheaper GPS, the rover can be built with a maximum cost of 500 €. 
+
+The platform is based on commercial components that can be acquired by Internet. This project involves students and researchers to improve the development of the platform. Moreover, it can be used for teaching and research activities that involves mechanical, engineering, software, electronics and robotics.
 
 Required software:
 
