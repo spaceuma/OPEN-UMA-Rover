@@ -30,6 +30,7 @@ add entry point to ~/rov_ws/src/rov_node_pkg/setup.py
      'console_scripts': [
             'simple_node = rov_node_pkg.ROS2UMARov:main',
 ```
+Either use the Python script code given or the very own package inside the compressed workspace.
 
 Then make sure to source the package and build the workspace.
 ```
@@ -52,11 +53,11 @@ Guide: https://create.arduino.cc/projecthub/ansh2919/serial-communication-betwee
 
 ```pip install pyserial```
 
-TInfo about the Twist format for the msg variable which holds the data received from the topic.
+Info. about the Twist format for the msg variable which holds the data received from the topic.
 
 ```http://docs.ros.org/en/noetic/api/geometry_msgs/html/msg/Twist.html```
 
-### Tests with ros2 pub
+### Running the node
 
 Now that you have the message structure, you can publish data onto a topic directly from the command line using:
 
@@ -64,13 +65,7 @@ Now that you have the message structure, you can publish data onto a topic direc
 
 The ```'<args>'``` argument is the actual data you will pass to the topic, in the structure you just discovered in the previous section.
 
-Its important to note that this argument needs to be input in YAML syntax. Input the full command like so:
-
-```ros2 topic pub --once /turtle1/cmd_vel geometry_msgs/msg/Twist "{linear: {x: 2.0, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 1.8}}"```
-
 ```--once``` is an optional argument meaning “publish one message then exit”.
-
-### Running the node
 
 To run the node once sourced and built.
 
