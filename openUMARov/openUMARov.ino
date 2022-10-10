@@ -245,6 +245,8 @@ void loop()
     Serial.println(ref1);
    
     Serial.println(ref2);
+
+    Serial.print('\n');
       
     Serial.flush();
 

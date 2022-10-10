@@ -1,4 +1,4 @@
-#Python API for ROS2s
+#Python API for ROS2
 import rclpy 
 from rclpy.node import Node
 
@@ -55,10 +55,10 @@ class open_uma_rov_node(Node):
         #Debido a ello se recibe una consigna en m/s, que al ser operada es multiplicada por 100 para que la v de cada rueda sea cm/s.
         #La información de Nav2 se recibe en formato de velocidad {x,y,theta}, donde se limita y=0 por ser vehiculo no omnidireccional.
         print("[Velocity command received]" + "\n")                                          
-        print("Linear velocity = " + str(self.v) + "\n")
-        print("Angular velocity = " + str(self.w) + "\n")
-        print("Wheel Velocity Left: " + str(my_data[0]) + "\n")
-        print("Wheel Velocity Right: " + str(my_data[1]) + "\n")
+        print("Linear velocity = " + str(self.v) + " m/s" + "\n")
+        print("Angular velocity = " + str(self.w) + " m/s"+ "\n")
+        print("Wheel Velocity Left: " + str(my_data[0]) + " cm/s" + "\n")
+        print("Wheel Velocity Right: " + str(my_data[1]) + " cm/s" + "\n")
 
 
 def main(args=None):
@@ -77,9 +77,9 @@ def main(args=None):
         speed_1 = my_data[0]
         speed_2 = my_data[1]
 
-        print("First speed is: " + str(speed_1) + "\n")
+        print("First speed (Left) is: " + str(speed_1) + " cm/s" + "\n")
 
-        print("Seconds speed is: " + str(speed_2) + "\n")
+        print("Seconds speed (Right) is: " + str(speed_2) + " cm/s" + "\n")
 
         # Calculation of the pulses
         speed_1_pulses = speed_1 * (0.01 / (0.03 * (37.7 / 360)))
