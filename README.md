@@ -78,3 +78,13 @@ Check that /cmd_vel is a topic.
 Make a small test publishing a certain v and w.
 
 ```ros2 topic pub --once /cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.5, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.5}}"```
+
+## Rover URDF
+
+In order to test the Rover in a simulated environment, a URDF file of the OpenUMARov has been developed.
+
+![alt text](https://github.com/spaceuma/OPEN-UMA-Rover/blob/ROS2/rover_urdf.png?raw=true)
+
+Useful information about the development of the URDF can be found here:
+
+https://automaticaddison.com/the-ultimate-guide-to-the-ros-2-navigation-stack/
