@@ -79,6 +79,14 @@ Make a small test publishing a certain v and w.
 
 ```ros2 topic pub --once /cmd_vel geometry_msgs/msg/Twist "{linear: {x: 0.5, y: 0.0, z: 0.0}, angular: {x: 0.0, y: 0.0, z: 0.5}}"```
 
+### Interface for velocity control
+
+Another way to easily control your robot is by using the RQT interface.
+
+```rqt_robot_steering```
+
+By including the topic that you wish to publish to, which is ```cmd_vel```, you can easily control the Rover.
+
 ## Rover URDF
 
 In order to test the Rover in a simulated environment, a URDF file of the OpenUMARov has been developed.
@@ -88,3 +96,13 @@ In order to test the Rover in a simulated environment, a URDF file of the OpenUM
 Useful information about the development of the URDF can be found here:
 
 https://automaticaddison.com/the-ultimate-guide-to-the-ros-2-navigation-stack/
+
+## Joystick Control
+
+A good way to easily control the Rover is by using the Teleop Joystick Control.
+
+Implemented here:
+
+https://index.ros.org/p/teleop_twist_joy/github-ros2-teleop_twist_joy/#humble-overview
+
+By default, it uses the ps3_config.yaml file, in which it is important to limit the v to around 0.5 m/s and the w to around 0.3 rad/s.
