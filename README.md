@@ -96,6 +96,9 @@ In order to test the Rover in a simulated environment, a URDF file of the OpenUM
 Useful information about the development of the URDF can be found here:
 
 https://automaticaddison.com/the-ultimate-guide-to-the-ros-2-navigation-stack/
+
+And:
+
 https://navigation.ros.org/setup_guides/index.html#
 
 ## Joystick Control
