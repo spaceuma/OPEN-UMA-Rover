@@ -96,13 +96,16 @@ In order to test the Rover in a simulated environment, a URDF file of the OpenUM
 Useful information about the development of the URDF can be found here:
 
 https://automaticaddison.com/the-ultimate-guide-to-the-ros-2-navigation-stack/
+https://navigation.ros.org/setup_guides/index.html#
 
 ## Joystick Control
 
-A good way to easily control the Rover is by using the Teleop Joystick Control.
+A good way to easily control the Rover is by using the Teleoperation Joystick Control.
 
 Implemented here:
 
 https://index.ros.org/p/teleop_twist_joy/github-ros2-teleop_twist_joy/#humble-overview
 
-By default, it uses the ps3_config.yaml file, in which it is important to limit the v to around 0.5 m/s and the w to around 0.3 rad/s.
+By default, it uses the ```ps3_config.yaml``` file, in which it is important to limit the velocity to around ```0.5 m/s``` and the angular velocity to around ```0.3 rad/s```.
+
+To test this package a F710 Game Pad with a USB with Bluetooth connection was used, even though the ```.config``` file is for the PS3 Joystick. If you wish to use a Bluetooh joystick control, you have to edit the directory of the connection to rather the Bluetooth direction, using a USB connection is recommended nonetheless.
