@@ -112,3 +112,11 @@ https://index.ros.org/p/teleop_twist_joy/github-ros2-teleop_twist_joy/#humble-ov
 By default, it uses the ```ps3_config.yaml``` file, in which it is important to limit the velocity to around ```0.5 m/s``` and the angular velocity to around ```0.3 rad/s```.
 
 To test this package a F710 Game Pad with a USB with Bluetooth connection was used, even though the ```.config``` file is for the PS3 Joystick. If you wish to use a Bluetooh joystick control, you have to edit the directory of the connection to rather the Bluetooth direction, using a USB connection is recommended nonetheless.
+
+To use it with the Raspberry Pi 4 the following changes should be done:
+
+- Add permissions to read/write Serial: ```sudo add user $USER $(stat --format="%G" /dev/ttyACM0)```
+- Uninstall the default joystick teleop. from ROS2 Lib. Head to opt/ros/lib and remove the file teleop_twist_joy. 
+- The last step is due to ROS2 using the config. of the default driver and its parameters instead of your package.
+- Launch the driver as normally.
+- if it doesn´t work use the building command: ```colcon build --allow-overriding teleop_twist_joy```
