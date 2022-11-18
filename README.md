@@ -128,7 +128,7 @@ To test this package a F710 Game Pad with a USB with Bluetooth connection was us
 
 To use it with the Raspberry Pi 4 the following changes should be done:
 
-- Add permissions to read/write Serial: ```sudo add user $USER $(stat --format="%G" /dev/ttyACM0)```
+- Add permissions to read/write Serial: ```sudo adduser $USER $(stat --format="%G" /dev/ttyACM0)```
 - Uninstall the default joystick teleop. from ROS2 Lib. Head to opt/ros/lib and remove the file teleop_twist_joy. 
 - The last step is due to ROS2 using the config. of the default driver and its parameters instead of your package.
 - Launch the driver as normally.
