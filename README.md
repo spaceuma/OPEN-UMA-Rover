@@ -101,6 +101,19 @@ And:
 
 https://navigation.ros.org/setup_guides/index.html#
 
+## Rover SDF
+
+To implement Rover simulations on Gazebo, it is necessary to develop the SDF Model of it. 
+
+![alt text](https://github.com/spaceuma/OPEN-UMA-Rover/blob/ROS2/SDF_Model.png?raw=true)
+
+This model uses the following plugins.
+
+- GPS Plugin to simulate such in the simulation environment.
+- IMU to simulate the orientation of the Rover.
+- Differential drive Model to implement the movement of the Rover 
+- Joint State Publisher to know wheels state.
+
 ## Joystick Control
 
 A good way to easily control the Rover is by using the Teleoperation Joystick Control.
