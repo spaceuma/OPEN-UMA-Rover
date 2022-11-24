@@ -122,7 +122,7 @@ Implemented here:
 
 https://index.ros.org/p/teleop_twist_joy/github-ros2-teleop_twist_joy/#humble-overview
 
-By default, it uses the ```ps3_config.yaml``` file, in which it is important to limit the velocity to around ```0.5 m/s``` and the angular velocity to around ```0.3 rad/s```.
+By default, it uses the ```ps3_config.yaml``` file, in which it is important to limit the velocity to around ```0.4 m/s``` and the angular velocity to around ```1.2 rad/s``` due to the implementation of the digital filter in the Arduino code.
 
 To test this package a F710 Game Pad with a USB with Bluetooth connection was used, even though the ```.config``` file is for the PS3 Joystick. If you wish to use a Bluetooh joystick control, you have to edit the directory of the connection to rather the Bluetooth direction, using a USB connection is recommended nonetheless.
 
