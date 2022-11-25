@@ -22,19 +22,20 @@
 #define  dirPWM1 8
 #define  dirPWM2 7
 
+//KP = 3, KI = 30
 
 //Definicion de las constantes para el PID 1
-#define kp1 3
-#define ki1 30
+#define kp1 0.5
+#define ki1 20
 #define kd1 0
 
 //Definicion de las constantes para el PID 2
-#define kp2 3
-#define ki2 30
+#define kp2 0.5
+#define ki2 20
 #define kd2 0
 
 //Definicion filtro digital exponencial
-#define alpha 0.4
+#define alpha 0.6
 
 
 //PWM -- variable para designar valor al PWM
@@ -69,6 +70,7 @@ long int volatile en1;
 long int volatile enOld1;
 long int volatile mn1;
 long int volatile mn1Old;
+long int volatile mn1Oldest;
 
 //Variables globales para PID 2
 long int volatile sn2;
@@ -76,6 +78,7 @@ long int volatile en2;
 long int volatile enOld2;
 long int volatile mn2;
 long int volatile mn2Old;
+long int volatile mn2Oldest;
 
 //Variables para establecer limites minimo y maximo de los PID (efecto wind-up)
 long int volatile snmin;
@@ -127,11 +130,13 @@ void setup()
   enOld1 = 0;
   mn1 = 0;
   mn1Old = 0;
+  mn1Oldest = 0;
   sn2 = 0;
   en2 = 0;
   enOld2 = 0;
   mn2 = 0;
   mn2Old = 0;
+  mn2Oldest = 0;
   
 
   //Establecimiento de unos limites ya que el motor tiene una velocidad maxima dada por sus caracteristicas.
@@ -197,7 +202,7 @@ void loop()
   //Espera hasta que halla alguna informacion disponible en el puerto serie.
   if (Serial.available())
   {
-    Serial.println("Conex existe");
+    //Serial.println("Conex existe");
     //La funcion serial.readbytes lee datos del buffer serie y los guarda en dos variables buffer que tienen una capacidad de 2 bytes cada una.      
     Serial.readBytes(buffIn_1, 2);
     Serial.readBytes(buffIn_2, 2);
@@ -224,10 +229,7 @@ void loop()
     // Serial.println(pulsos2);
     
     // Serial.println(velpulsos1);
-    // Serial.println(velpulsos2);
-
-    // Serial.println(auxi1);  
-    // Serial.println(auxi2);   
+    // Serial.println(velpulsos2); 
   
     // Serial.println(ref1);
     // Serial.println(ref2);
@@ -237,14 +239,14 @@ void loop()
     //Serial.flush();
 
     // Se limpia el buffer, abriendo y cerrando el puerto serie.
-    Serial.end();
-    Serial.begin(115200);
+    // Serial.end();
+    // Serial.begin(115200);
     // Espera de un segundo.
-    delay(100);
+    // delay(100);
   } 
   // Si no hay ninguna informacion disponible para ser recibida, se limpia el buffer y se espera hasta que llegue algun dato.
   else {
-    Serial.println("Conex Perdida, estableciendo");
+    //Serial.println("Conex Perdida, estableciendo");
     // Se limpia el buffer, abriendo y cerrando el puerto serie.
     Serial.end();
     Serial.begin(115200);
@@ -425,11 +427,17 @@ void PIDControl1()
   }
   //Calculo del valor PWM1.
   mn1 = (kp1 * en1) + ((ki1 * sn1) / 100) + (kd1 * (en1 - enOld1));
+  
   //Filtro digital de suavizado
-  mn1 = alpha*mn1Old + (1-alpha)*mn1;
+  //mn1 = alpha*mn1Old + (1-alpha)*mn1;
+  mn1 = alpha*mn1 + alpha*(1-alpha)*mn1Old + (1-alpha)*(1-alpha) * mn1Oldest; //Debe tener alpha elevada en consecuencia
   //Se actualiza el error anterior por el actual.
   enOld1 = en1;
+  mn1Oldest = mn1Old;
   mn1Old = mn1;  
+  
+  Serial.println("mn1: ");
+  Serial.println(mn1);
 }
 
 //Funcion para mandar la potencia y direccion al motor 1.
@@ -485,11 +493,18 @@ void PIDControl2()
   
   //Calculo del valor PWM.
   mn2 = (kp2 * en2) + ((ki2 * sn2) / 100) + (kd2 * (en2 - enOld2));
+  
   //Filtro digital de suavizado
-  mn2 = alpha*mn2Old + (1-alpha)*mn2;
+  //mn2 = alpha*mn2Old + (1-alpha)*mn2; //Debe tener alpha baja en consecuencia
+  mn2 = alpha*mn2 + alpha*(1-alpha)*mn2Old + (1-alpha)*(1-alpha) * mn2Oldest; //Debe tener alpha elevada en consecuencia
   //Se actualiza el error anterior por el actual.
   enOld2 = en2;
+  mn2Oldest = mn2Old;
   mn2Old = mn2;  
+  
+  Serial.println("mn2: ");
+  Serial.println(mn2);
+  Serial.println("\n");
 }
 
 //Funcion para mandar la potencia y direccion al motor 2.
