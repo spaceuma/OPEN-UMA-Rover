@@ -202,7 +202,6 @@ void loop()
   //Espera hasta que halla alguna informacion disponible en el puerto serie.
   if (Serial.available())
   {
-    //Serial.println("Conex existe");
     //La funcion serial.readbytes lee datos del buffer serie y los guarda en dos variables buffer que tienen una capacidad de 2 bytes cada una.      
     Serial.readBytes(buffIn_1, 2);
     Serial.readBytes(buffIn_2, 2);
@@ -225,18 +224,17 @@ void loop()
     //En la variable ref guardamos la variable auxi la cual es de tipo byte y la convertimos a tipo entero de 32 bits.
     ref2 = (long int)auxi2;
 
-    // Serial.println(pulsos1);
-    // Serial.println(pulsos2);
+    //Envio por puerto serie a ROS2
+    Serial.println(pulsos1);
+    Serial.println(pulsos2);
     
-    // Serial.println(velpulsos1);
-    // Serial.println(velpulsos2); 
+    Serial.println(velpulsos1);
+    Serial.println(velpulsos2); 
   
-    // Serial.println(ref1);
-    // Serial.println(ref2);
+    Serial.println(ref1);
+    Serial.println(ref2);
     
-    // Serial.println("\n");
-    
-    //Serial.flush();
+    Serial.flush();
 
     // Se limpia el buffer, abriendo y cerrando el puerto serie.
     // Serial.end();
@@ -246,7 +244,6 @@ void loop()
   } 
   // Si no hay ninguna informacion disponible para ser recibida, se limpia el buffer y se espera hasta que llegue algun dato.
   else {
-    //Serial.println("Conex Perdida, estableciendo");
     // Se limpia el buffer, abriendo y cerrando el puerto serie.
     Serial.end();
     Serial.begin(115200);
@@ -435,9 +432,6 @@ void PIDControl1()
   enOld1 = en1;
   mn1Oldest = mn1Old;
   mn1Old = mn1;  
-  
-  Serial.println("mn1: ");
-  Serial.println(mn1);
 }
 
 //Funcion para mandar la potencia y direccion al motor 1.
@@ -501,10 +495,6 @@ void PIDControl2()
   enOld2 = en2;
   mn2Oldest = mn2Old;
   mn2Old = mn2;  
-  
-  Serial.println("mn2: ");
-  Serial.println(mn2);
-  Serial.println("\n");
 }
 
 //Funcion para mandar la potencia y direccion al motor 2.
