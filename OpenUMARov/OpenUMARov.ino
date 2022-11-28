@@ -22,8 +22,11 @@
 #define  dirPWM1 8
 #define  dirPWM2 7
 
-//KP = 3, KI = 30
+//Defincion de los pines donde se encuentran los sensores de corriente.
+const int sensorCurrent1 = A1;
+const int sensorCurrent2 = A2;
 
+//KP = 3, KI = 30
 //Definicion de las constantes para el PID 1
 #define kp1 0.5
 #define ki1 20
@@ -37,6 +40,9 @@
 //Definicion filtro digital exponencial
 #define alpha 0.6
 
+//Corriente -- variable para lectura de corriente
+float lectura_analog1;
+float lectura_analog2;
 
 //PWM -- variable para designar valor al PWM
 byte valorPWM1;
@@ -163,6 +169,9 @@ void setup()
   attachInterrupt(2, doEncoder2A, CHANGE);
   attachInterrupt(3, doEncoder2B, CHANGE);
 
+  //Pines de lectura de corriente como entradas.
+  pinMode(sensorCurrent1, INPUT);
+  pinMode(sensorCurrent2, INPUT);  
 
   //INTERRUPCION TIEMPO (TIMER1) -- CALCULO VELOCIDAD
   //Configuracion interrupcion temporizada para calculo de la velocidad.
@@ -223,6 +232,10 @@ void loop()
     auxi2 += (byte)buffIn_2[0];
     //En la variable ref guardamos la variable auxi la cual es de tipo byte y la convertimos a tipo entero de 32 bits.
     ref2 = (long int)auxi2;
+
+    //Lectura de la corriente de los motores
+    lectura_analog1 = analogRead(sensorCurrent1);
+    lectura_analog2 = analogRead(sensorCurrent2);
 
     //Envio por puerto serie a ROS2
     Serial.println(pulsos1);
@@ -424,8 +437,8 @@ void PIDControl1()
   mn1 = (kp1 * en1) + ((ki1 * sn1) / 100) + (kd1 * (en1 - enOld1));
   
   //Filtro digital de suavizado
-  //mn1 = alpha*mn1Old + (1-alpha)*mn1;
-  mn1 = alpha*mn1 + alpha*(1-alpha)*mn1Old + (1-alpha)*(1-alpha) * mn1Oldest; //Debe tener alpha elevada en consecuencia
+  //mn1 = alpha*mn1 + (1-alpha)*mn1Old;
+  //mn1 = alpha*mn1 + alpha*(1-alpha)*mn1Old + (1-alpha)*(1-alpha) * mn1Oldest; //Debe tener alpha elevada en consecuencia
   //Se actualiza el error anterior por el actual.
   enOld1 = en1;
   mn1Oldest = mn1Old;
@@ -487,8 +500,8 @@ void PIDControl2()
   mn2 = (kp2 * en2) + ((ki2 * sn2) / 100) + (kd2 * (en2 - enOld2));
   
   //Filtro digital de suavizado
-  //mn2 = alpha*mn2Old + (1-alpha)*mn2; //Debe tener alpha baja en consecuencia
-  mn2 = alpha*mn2 + alpha*(1-alpha)*mn2Old + (1-alpha)*(1-alpha) * mn2Oldest; //Debe tener alpha elevada en consecuencia
+  //mn2 = alpha*mn2 + (1-alpha)*mn2Old; //Debe tener alpha baja en consecuencia
+  //mn2 = alpha*mn2 + alpha*(1-alpha)*mn2Old + (1-alpha)*(1-alpha) * mn2Oldest; //Debe tener alpha elevada en consecuencia
   //Se actualiza el error anterior por el actual.
   enOld2 = en2;
   mn2Oldest = mn2Old;

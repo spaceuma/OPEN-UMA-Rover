@@ -85,7 +85,7 @@ def main(args=None):
     #Create a thread to constantly spin the node while constantly executing the loop at the same time
     thread = threading.Thread(target=rclpy.spin, args=(rov_node, ), daemon=True)
     thread.start()
-    rate = rov_node.create_rate(10)
+    rate = rov_node.create_rate(5)
     #Publisher data
     msg_wheels = Float32()
 
@@ -139,7 +139,7 @@ def main(args=None):
                 arduino_value = arduino.readline().rstrip()
                 print(arduino_value)
                 # If byte does not hold info. it will set the byte to zero.
-                if len(arduino_value) == 0 or arduino_value == "b'-'":
+                if len(arduino_value) == 0 or arduino_value == b'-' or arduino_value == '-':
                     # We will use the value from the last iteration if the variable has no data
                     pass
                 else:
@@ -201,6 +201,7 @@ def main(args=None):
 
         # Buffer cleaning
         arduino.reset_input_buffer()
+        # arduino.reset_output_buffer()
 
         rate.sleep()
 
