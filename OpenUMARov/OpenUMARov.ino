@@ -46,17 +46,17 @@ byte valorPWM2;
 
 //Variables para interrupciones
 //Guarda el numero de pulsos de la rueda 1
-double pulsos1;
+float pulsos1;
 //Guarda el numero de pulsos de la rueda 1, 10 ms antes que es el tiempo al cual esta configurada la interrupcion
-double pulsos1Ant;
+float pulsos1Ant;
 //Diferencia de pulsos que se han dado en los 10 ms (velpulsos=pulsos-pulsosAnt)
-double velpulsos1;
+float velpulsos1;
 //Guarda el numero de pulsos de la rueda 2
-double pulsos2;
+float pulsos2;
 //Guarda el numero de pulsos de la rueda 2, 10 ms antes que es el tiempo al cual esta configurada la interrupcion
-double pulsos2Ant;
+float pulsos2Ant;
 //Diferencia de pulsos que se han dado en los 10 ms (velpulsos=pulsos-pulsosAnt)
-double velpulsos2;
+float velpulsos2;
 
 
 
@@ -65,29 +65,29 @@ unsigned long tiempoint = 10000;
 
 
 //Variables globales para PID 1
-long int volatile sn1;
-long int volatile en1;
-long int volatile enOld1;
-long int volatile mn1;
-long int volatile mn1Old;
-long int volatile mn1Oldest;
+int volatile sn1;
+int volatile en1;
+int volatile enOld1;
+int volatile mn1;
+int volatile mn1Old;
+int volatile mn1Oldest;
 
 //Variables globales para PID 2
-long int volatile sn2;
-long int volatile en2;
-long int volatile enOld2;
-long int volatile mn2;
-long int volatile mn2Old;
-long int volatile mn2Oldest;
+int volatile sn2;
+int volatile en2;
+int volatile enOld2;
+int volatile mn2;
+int volatile mn2Old;
+int volatile mn2Oldest;
 
 //Variables para establecer limites minimo y maximo de los PID (efecto wind-up)
-long int volatile snmin;
-long int volatile snmax;
+int volatile snmin;
+int volatile snmax;
 
 //Referencia para los PID
 //Estas referencia son el numero de pulsos que se deben de dar para mantener una velocidad constante
-long int volatile ref1;
-long int volatile ref2;
+int volatile ref1;
+int volatile ref2;
 
 //Para la recepcion de las velocidades aportadas por el nodo de ROS
 
@@ -234,13 +234,13 @@ void loop()
     Serial.println(ref1);
     Serial.println(ref2);
     
-    Serial.flush();
+    // Serial.flush();
 
     // Se limpia el buffer, abriendo y cerrando el puerto serie.
-    // Serial.end();
-    // Serial.begin(115200);
-    // Espera de un segundo.
-    // delay(100);
+    Serial.end();
+    Serial.begin(115200);
+    // Espera de un segundo
+    delay(50);
   } 
   // Si no hay ninguna informacion disponible para ser recibida, se limpia el buffer y se espera hasta que llegue algun dato.
   else {
@@ -250,8 +250,6 @@ void loop()
     // Espera de un segundo.
     delay(100);  
   }
-
-
 }
 
 
