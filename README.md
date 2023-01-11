@@ -17,6 +17,8 @@ The platform is based on commercial components that can be acquired by Internet.
 
 An adaptation of the original code to ROS2 Humble has been developed. This enables the use of the Rover with the Middleware ROS2. 
 
+![rover_ros2](https://user-images.githubusercontent.com/94115082/211777911-90832245-dfb3-46b3-bb0b-76830e6d5024.png)
+
 ### Guide
 
 First you need to setup your package and your workspace.
