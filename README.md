@@ -106,7 +106,7 @@ colcon build --allow-overriding teleop_twist_joy
 PS3 is default, to run for another config (e.g. xbox) use this:
 
 ```
-ros2 launch teleop_twist_joy teleop-launch.py joy_config:='xbox'
+ros2 launch teleop_twist_joy teleop-launch.py
 ```
 
 Note: this launch file also launches the joy node so do not run it separately.
