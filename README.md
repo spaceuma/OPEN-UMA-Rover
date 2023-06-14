@@ -64,13 +64,13 @@ ros2 run rov_node_pkg ROS2UMARov
 
 In order to test the Rover in a simulated environment, a URDF file of the OpenUMARov has been developed.
 
-![alt text](https://github.com/spaceuma/OPEN-UMA-Rover/blob/ROS2/rover_urdf.png?raw=true)
+![alt text](https://github.com/spaceuma/OPEN-UMA-Rover/blob/ROS2/Images/rover_urdf.png?raw=true)
 
 ## Rover SDF
 
 To implement Rover simulations on Gazebo, it is necessary to develop the SDF Model of it. 
 
-![alt text](https://github.com/spaceuma/OPEN-UMA-Rover/blob/ROS2/SDF_Model.png?raw=true)
+![alt text](https://github.com/spaceuma/OPEN-UMA-Rover/blob/ROS2/Images/SDF_Model.png?raw=true)
 
 This model uses the following plugins.
 
