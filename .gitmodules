@@ -2,3 +2,7 @@
 	path = teleop_twist_joy
 	url = https://github.com/spaceuma/teleop_twist_joy.git
 	branch = main
+[submodule "rov_node_pkg"]
+	path = rov_node_pkg
+	url = https://github.com/spaceuma/rov_node_pkg.git
+	branch = main
