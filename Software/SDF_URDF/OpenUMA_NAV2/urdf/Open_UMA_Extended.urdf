@@ -1,0 +1,209 @@
+<?xml version="1.0" ?>
+<robot name="Open_UMA_Extended" xmlns:xacro="http://ros.org/wiki/xacro">
+
+  <!-- ****************** ROBOT CONSTANTS *******************************  -->
+  <!-- Define the size of the robot's main chassis in meters -->
+  <!--
+  <xacro:property name="base_width" value="0.175"/>
+  
+  <xacro:property name="base_length" value="0.220"/>
+  
+  <xacro:property name="base_height" value="0.046"/>
+  -->
+	
+  <!-- Define the shape of the robot's two back wheels in meters -->
+  <xacro:property name="wheel_radius" value="0.058"/>
+  <xacro:property name="wheel_width" value="0.06"/>
+
+  <!-- x-axis points forward, y-axis points to left, z-axis points upwards -->
+  <!-- Define the gap between the wheel and chassis along y-axis in meters -->
+  <xacro:property name="wheel_ygap" value="0.035"/>
+
+  <!-- Position the wheels along the z-axis -->
+  <!--0.028-base_height/2-->
+  <xacro:property name="wheel_zoff" value="0.005"/>
+
+  <!-- Position the wheels along the x-axis -->
+  <xacro:property name="wheel_xoff" value="0.084"/>
+
+  <!-- Define INERTIAL property macros  -->
+
+  <xacro:macro name="box_inertia" params="m w h d">
+    <inertial>
+      <origin xyz="0 0 0" rpy="${pi/2} 0 ${pi/2}"/>
+      <mass value="${m}"/>
+      <inertia ixx="${(m/12) * (h*h + d*d)}" ixy="0.0" ixz="0.0" iyy="${(m/12) * (w*w + d*d)}" iyz="0.0" izz="${(m/12) * (w*w + h*h)}"/>
+    </inertial>
+  </xacro:macro>
+
+  <xacro:macro name="cylinder_inertia" params="m r h">
+    <inertial>
+      <origin xyz="0 0 0" rpy="${pi/2} 0 0" />
+      <mass value="${m}"/>
+      <inertia ixx="${(m/12) * (3*r*r + h*h)}" ixy = "0" ixz = "0" iyy="${(m/12) * (3*r*r + h*h)}" iyz = "0" izz="${(m/2) * (r*r)}"/>
+    </inertial>
+  </xacro:macro>
+
+  <!-- ****************** ROBOT BASE FOOTPRINT ***************************  -->
+  <!-- Define the center of the main robot chassis projected on the ground -->	
+  <link name="base_footprint"/>
+
+  <!-- The base footprint of the robot is located underneath the chassis -->
+  <joint name="base_joint" type="fixed">
+    <parent link="base_footprint"/>
+    <child link="base_link" />
+    <!--origin xyz="0.0 0.0 ${(wheel_radius+wheel_zoff)}" rpy="0 0 0"/-->
+    <origin xyz="0.0 0.0 0.0" rpy="0 0 0"/>
+  </joint>
+
+  <!-- ********************** ROBOT BASE *********************************  -->
+  <link name="base_link">
+    <visual>
+      <!--origin xyz="0 0 ${wheel_radius}" rpy="1.5707963267949 0 3.141592654"/-->
+      <origin xyz="0 0 0" rpy="1.5707963267949 0 3.141592654"/>
+      <geometry>
+        <!--             X               Y             Z      -->
+        <box size="0.22 0.046 0.175"/>
+      </geometry>
+      <material name="Red">
+        <color rgba="${255/255} ${0/255} ${0/255} 1.0"/>
+      </material>
+    </visual>
+
+    <collision>
+      <geometry>
+        <box size="0.22 0.046 0.175"/>
+      </geometry>
+    </collision>
+    <!--Mass defined in Kg -->
+    <xacro:box_inertia m="2.0" w="0.175" d="0.22" h="0.046"/>
+    
+  </link>
+
+  <gazebo reference="base_link">
+    <material>Gazebo/Red</material>
+  </gazebo>
+
+  <!-- *********************** DRIVE WHEELS ******************************  -->
+
+  <xacro:macro name="wheel" params="prefix x_reflect y_reflect">
+    <link name="${prefix}_link">
+      <visual>
+        <origin xyz="0 0 0" rpy="1.5707963267949 0 0"/>
+        <geometry>
+            <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+        </geometry>
+        <material name="White">
+          <color rgba="${255/255} ${255/255} ${255/255} 1.0"/>
+        </material>
+      </visual>
+      
+      <collision>
+        <origin xyz="0 0 0" rpy="${pi/2} 0 0"/>
+        <geometry>
+          <cylinder radius="${wheel_radius}" length="${wheel_width}"/>
+        </geometry>
+      </collision>
+    
+      <xacro:cylinder_inertia m="0.5" r="${wheel_radius}" h="${wheel_width}"/>
+      
+    </link>
+
+    <!-- Connect the wheels to the base_link at the appropriate location, and 
+         define a continuous joint to allow the wheels to freely rotate about
+         an axis -->
+    <joint name="${prefix}_joint" type="revolute">
+      <parent link="base_link"/>
+      <child link="${prefix}_link"/>
+      <origin xyz="${x_reflect*wheel_xoff} ${y_reflect*(0.175/2+wheel_ygap)} ${-wheel_zoff}" rpy="0 0 0"/>
+      <limit upper="3.1415" lower="-3.1415" effort="30" velocity="5.0"/>
+      <axis xyz="0 1 0"/>
+    </joint>
+  </xacro:macro>
+
+  <!-- Instantiate two wheels using the macro we just made through the 
+       xacro:wheel tags. We also define the parameters to have one wheel
+       on both sides at the back of our robot (i.e. x_reflect=-1). -->
+  <!--Rear left wheel-->     
+  <xacro:wheel prefix="drivewhl_rl" x_reflect="-1" y_reflect="1" />
+  <!--Rear right wheel--> 
+  <xacro:wheel prefix="drivewhl_rr" x_reflect="-1" y_reflect="-1" />
+  <!--Front left wheel--> 
+  <xacro:wheel prefix="drivewhl_fl" x_reflect="1" y_reflect="1" />
+  <!--Front right wheel--> 
+  <xacro:wheel prefix="drivewhl_fr" x_reflect="1" y_reflect="-1" />
+
+  <!-- *********************** IMU SETUP *********************************  -->
+  <!-- Each sensor must be attached to a link.                              --> 
+  
+  <joint name="imu_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="imu_link"/>
+    <origin xyz="0.1 0 0.023" rpy="0 0 0"/>
+  </joint>
+
+  <link name="imu_link"/>
+
+  <!-- *********************** GPS SETUP **********************************  -->
+  <joint name="gps_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="gps_link"/>
+    <origin xyz="0 0 0.023" rpy="0 0 0"/>
+  </joint>
+
+  <link name="gps_link"/>
+  
+    <!-- *********************** LIDAR SETUP **********************************  -->
+  <joint name="scan_joint" type="fixed">
+    <parent link="base_link"/>
+    <child link="base_scan"/>
+    <origin xyz="0 0 0.122" rpy="0 0 0"/>
+  </joint>
+  
+  <link name="base_scan"/>
+  
+    <!-- *********************** CAMERAS SETUP **********************************  -->  
+    
+  <joint name="camera_joint" type="fixed">
+    <origin xyz="0.064 -0.065 0.094" rpy="0 0 0"/>
+    <parent link="base_link"/>
+    <child link="camera_link"/>
+  </joint>
+
+  <link name="camera_link"/>
+      
+  <joint name="camera_rgb_joint" type="fixed">
+    <origin xyz="0.005 0.018 0.013" rpy="0 0 0"/>
+    <!-- <origin xyz="${r200_cam_rgb_px} ${r200_cam_rgb_py} ${r200_cam_rgb_pz}" rpy="0 0 0"/> -->
+    <parent link="camera_link"/>
+    <child link="camera_rgb_frame"/>
+  </joint>
+ 
+  <link name="camera_rgb_frame"/>
+  
+  <joint name="camera_rgb_optical_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="-1.57 0 -1.57"/>
+    <parent link="camera_rgb_frame"/>
+    <child link="camera_rgb_optical_frame"/>
+  </joint>
+  
+  <link name="camera_rgb_optical_frame"/>
+
+  <joint name="camera_depth_joint" type="fixed">
+    <origin xyz="0.005 0.028 0.013" rpy="-1.57 0 -1.57"/>
+    <!-- <origin xyz="${r200_cam_rgb_px} ${r200_cam_rgb_py + r200_cam_depth_offset} ${r200_cam_rgb_pz}" rpy="0 0 0"/> -->
+    <parent link="camera_link"/>
+    <child link="camera_depth_frame"/>
+  </joint>
+  
+  <link name="camera_depth_frame"/>
+
+  <joint name="camera_depth_optical_joint" type="fixed">
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <parent link="camera_depth_frame"/>
+    <child link="camera_depth_optical_frame"/>
+  </joint>
+  
+  <link name="camera_depth_optical_frame"/>  
+
+</robot>

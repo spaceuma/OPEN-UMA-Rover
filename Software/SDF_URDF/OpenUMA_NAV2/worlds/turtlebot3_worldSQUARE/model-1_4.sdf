@@ -1,0 +1,44 @@
+<sdf version='1.4'>
+    <!-- Draw Circle -->
+    <model name='ros_symbol'>
+      <static>1</static>
+      <link name='symbol'>
+        <!-- Draw Wall -->
+        <collision name='body'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://turtlebot3_worldSQUARE/meshes/SquareWall.dae</uri>
+            <scale>2 2 2</scale>
+          </mesh>
+        </geometry>
+        <max_contacts>10</max_contacts>
+        <surface>
+          <bounce/>
+          <friction>
+            <ode/>
+          </friction>
+          <contact>
+            <ode/>
+          </contact>
+        </surface>
+      </collision>
+
+      <visual name='body'>
+        <pose>0 0 0 0 0 0</pose>
+        <geometry>
+          <mesh>
+            <uri>model://turtlebot3_worldSQUARE/meshes/SquareWall.dae</uri>
+            <scale>2 2 2</scale>
+          </mesh>
+        </geometry>
+        <material>
+          <script>
+            <uri>/usr/share/media/materials/scripts/gazebo.material</uri>
+            <name>Gazebo/Red</name>
+          </script>
+        </material>        
+      </visual>
+    </link>
+  </model>
+</sdf>

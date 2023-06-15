@@ -1,7 +1,7 @@
-# UMA Open Source Rover
+# UMA Open Source Rover ROS2
 Open hardware and software rover developed by Malaga University
 
-*Authors:* C.J. Pérez del Pulgar, Ricardo Sánchez Ibáñez, Patricio López Lupiañez, Francisco de Asís Delgado Rivero and Laura Marta Mantoani
+*Authors:* C.J. Pérez del Pulgar, Ricardo Sánchez Ibáñez, Patricio López Lupiañez, Francisco de Asís Delgado Rivero, Laura Marta Mantoani and Danil Rivero Pavlenko
 
 *Contact info:* carlosperez@uma.es
 
@@ -13,86 +13,106 @@ The OpenUmaRov is an open source mobile robotic platform that allows anyone to b
 
 The platform is based on commercial components that can be acquired by Internet. This project involves students and researchers to improve the development of the platform. Moreover, it can be used for teaching and research activities that involves mechanical, engineering, software, electronics and robotics.
 
-Required software:
+## ROS2 
 
-- Eagle: Software to design PCB.
+An adaptation of the original code to ROS2 Humble has been developed. This enables the use of the Rover with the Middleware ROS2. 
 
-- Arduino IDE: the open platform is based on an Arduino.
+![rover_ros2](https://user-images.githubusercontent.com/94115082/211777911-90832245-dfb3-46b3-bb0b-76830e6d5024.png)
 
-- LabVIEW: the platform has a LabVIEW GUI.
+### Guide
 
-- ROS: the platform is controlled using ROS framework. 
+First you need to setup your package and your workspace. Use the package in this repository inside the workspace.
 
-- Python IDE: the OpenUMARov node and the GPS node are written in Python.
+Then make sure to source the package and build the workspace.
+```
+ source install/setup.bash
+ colcon build
+```
 
+### Troubleshooting
 
-## Rover prototype
+Issues might appear while setting up your workspace.
 
-The current version of the rover is shown in the following images. Some experiments were carried out to demonstrate the rover is able to move indoor and outdoor, in different environments.
+- setuptools 58.2 for colcon build sterr output error due to deprecated version.
 
-In the following pictures, the rover can be seen on a beach and in a forest:
+https://answers.ros.org/question/396439/setuptoolsdeprecationwarning-setuppy-install-is-deprecated-use-build-and-pip-and-other-standards-based-tools/
 
-<p><img src="Images/Foto5_roverMar1.jpg" width="42.5%"/>     <img src="Images/Foto1_roverBosque.PNG" width="51%"/></p>
+```
+pip install setuptools==58.2.0
+```
 
-While in the following ones, it can be seen in a street and in a park:
+Install serial
+Guide: https://create.arduino.cc/projecthub/ansh2919/serial-communication-between-python-and-arduino-e7cce0
 
-<p><img src="Images/Foto3_roverObstaculo.PNG" width="42.5%"/>     <img src="Images/Foto2_roverParque.PNG" width="45%"/></p>
+```
+pip install pyserial
+```
 
+Info. about the Twist format for the msg variable which holds the data received from the topic.
 
-The following video shows the rover in different environments.
+http://docs.ros.org/en/noetic/api/geometry_msgs/html/msg/Twist.html
 
-[![IMAGE ALT TEXT HERE](https://img.youtube.com/vi/t7S4xO0TQe0/0.jpg)](https://www.youtube.com/watch?v=t7S4xO0TQe0)
+### Running the node
 
+To run the node once sourced and built.
 
-## Assembly
+```
+ros2 run rov_node_pkg ROS2UMARov
+```
 
-### Ordering Parts
+## Rover URDF
 
+In order to test the Rover in a simulated environment, a URDF file of the OpenUMARov has been developed.
 
-The rover system is made up of mechanical, electronic and computer parts. All of these parts can be obtained from the [Part list](https://github.com/spaceuma/OPEN-UMA-Rover/blob/master/Materials/Material.xlsx). The rover is based on a chassis provided by [RobotShop](https://www.robotshop.com/eu/en/4wd1-robot-aluminum-kit.html), an [Arduino Mega 2560](https://store.arduino.cc/arduino-mega-2560-rev3) with a [Emlid GPS Reach M+](https://emlid.com/reach/) (Optional), a [Raspberry Pi 3B+](https://www.raspberrypi.org/products/raspberry-pi-3-model-b-plus/) and a customized [PCB](https://github.com/spaceuma/OPEN-UMA-Rover/tree/master/Electrical) that includes [H-Bridges](http://www.ti.com/product/LMD18200) and [current sensors](https://www.allegromicro.com/en/Products/Sense/Current-Sensor-ICs/Zero-To-Fifty-Amp-Integrated-Conductor-Sensor-ICs/ACS712).
+![alt text](https://github.com/spaceuma/OPEN-UMA-Rover/blob/ROS2/Images/rover_urdf.png?raw=true)
 
-### Mechanical parts
+## Rover SDF
 
-The rover chassis can include two or four motors. The current version includes two [motors](https://www.robotshop.com/eu/en/lynxmotion-12vdc-200rpm-078kg-cm-ghm-16-w--rear-shaft.html) with [encoder](https://www.robotshop.com/eu/en/lynxmotion-quadrature-motor-encoder-v2-cable.html) (front) and two motors without encoders (back). The encoder should be fixed to the motor following the encoder instructions.
+To implement Rover simulations on Gazebo, it is necessary to develop the SDF Model of it. 
 
- <img src="Images/motorencoder.jpg" width="25%">
- 
+![alt text](https://github.com/spaceuma/OPEN-UMA-Rover/blob/ROS2/Images/SDF_Model.png?raw=true)
 
-### Electrical and electronics
+This model uses the following plugins.
 
-The rover power supply PCB has been designed using the CAD software Eagle and it has been manufactured by [Eurocircuits](https://www.eurocircuits.com). The CAD design can be found in the ["Electrical"](https://github.com/spaceuma/OPEN-UMA-Rover/tree/master/Electrical) folder and the electronic components are found in the [Part list](https://github.com/spaceuma/OPEN-UMA-Rover/blob/master/Materials/Material.xlsx). The resulting PCB is shown in the following figure.
+- GPS Plugin to simulate such in the simulation environment.
+- IMU to simulate the orientation of the Rover.
+- Differential drive Model to implement the movement of the Rover 
+- Joint State Publisher to know wheels state.
 
- <img src="Images/pcb.jpg" width="50%">
+An alternative for NAV2 has been implemented as en extended model.
 
+## Joystick Control
 
-### Arduino platform
+A good way to easily control the Rover is by using the Teleoperation Joystick Control.
 
-<img src="Images/placarduino.png" width="50%">
+By default, it uses the ```ps3_config.yaml``` file.
 
-### Raspberry Pi
+To test this package a F-710 Game Pad with a USB with Bluetooth connection was used, even though the ```.config``` file is for the PS3 Joystick. If you wish to use a Bluetooh joystick control, you have to edit the directory of the connection to rather the Bluetooth direction, using a USB connection is recommended nonetheless.
 
-The Raspberry Pi 3B+ is used to control the rover. Using the ROS framework, it receives data from Arduino through the serial port, and from the GPS ROS node through different topics, publishing each value in a different topic that can be visualized in a LabVIEW GUI.
+To use it with the PC the following changes should be done:
 
-<img src="Images/image85.PNG" width="50%">
+- Add permissions to read/write Serial: 
 
-### ROS
+```
+sudo adduser $USER $(stat --format="%G" /dev/ttyACM0)
+```
 
-The rover uses the ROS framework. There are two different nodes: one for the GPS (nmea_navsat_driver) and one for all data received from Arduino (open_uma_rov_node). Moreover, LabVIEW is working with the ROSforLabVIEW software, that allows to publish and subscribe to different topics. 
+- Build the package with the following command:
 
-<img src="Images/ROSlogo.png" width="50%">
+```
+colcon build --allow-overriding teleop_twist_joy
+```
 
-### GPS
+PS3 is default, to run for another config (e.g. xbox) use this:
 
-The rover uses a GPS Reach M+, a high precision GPS with a centimetre accuracy. Anyway, it can be replaced with a cheaper one, lowering the rover total cost. 
+```
+ros2 launch teleop_twist_joy teleop-launch.py
+```
 
-<img src="Images/image92.PNG" width="20%">
+Note: this launch file also launches the joy node so do not run it separately.
 
-### LabVIEW 
+Only if required:
 
-The LabVIEW GUI allows to control the rover. It has two topics where you can publish wheels speeds, and different topics where you can visualize all the data from Arduino and from the GPS.  
-
-<img src="Images/image121.PNG" width="100%">
-
-Moreover, GPS position can be visualized in a Google Maps map. 
-
-<img src="Images/image125.PNG" width="100%">
+- Uninstall the default joystick teleop. from ROS2 Lib. Head to opt/ros/lib and remove the file teleop_twist_joy. 
+- The last step is due to ROS2 using the config. of the default driver and its parameters instead of your package.
+- Launch the driver as normally.
